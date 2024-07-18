@@ -45,6 +45,11 @@ body{
 .table thead, .table tbody {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+}
+
+.table tbody{
+  margin-top: 0.5rem;
 }
 
 /* Ajusta el diseño de las filas de la cabecera y el cuerpo */
@@ -57,11 +62,17 @@ body{
   gap: 0.5rem;
 }
 
+.table .done{
+  text-decoration: line-through;
+  color: #4B4E6D;
+}
+
 .table tbody tr {
   background-color: var(--font-color);
   gap: 0;
   border-radius: 5px;
 }
+
 
 .table tbody tr td {
   padding: 0 0.5rem;

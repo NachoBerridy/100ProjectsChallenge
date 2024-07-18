@@ -1,16 +1,12 @@
 const container = document.querySelector("#container");
 const tasks = [];
-const currentTask ={
-  description: "",
-  date: ""
-}
 
-// Adding a title 
+// Adding a title
 const title = document.createElement("h1");
 title.innerHTML = "To Do App";
 container.appendChild(title);
 
-//The table
+// The table
 const table = document.createElement("table");
 table.className = "table";
 
@@ -20,32 +16,31 @@ table.appendChild(caption);
 
 const thead = document.createElement("thead");
 const headTr = document.createElement("tr");
-const fields = ["Description", "Date"];
+const fields = ["Description", "Date", "Done"];
 
-fields.map( (field) => {
+fields.map((field) => {
   const th = document.createElement("th");
   th.innerHTML = field;
-  headTr.appendChild(th)
+  headTr.appendChild(th);
 });
 
-const tbody = document.createElement("tbody")
+const tbody = document.createElement("tbody");
 
 thead.appendChild(headTr);
 table.appendChild(thead);
-table.appendChild(tbody)
+table.appendChild(tbody);
 container.appendChild(table);
 
-
-//Task input
+// Task input
 const newTaskForm = document.createElement("form");
-newTaskForm.className = "newTask"
+newTaskForm.className = "newTask";
 
 const inputGroup = document.createElement("div");
 inputGroup.className = "inputGroup";
 
 const taskInput = document.createElement("input");
 taskInput.type = "text";
-taskInput.placeholder = "Descripción"
+taskInput.placeholder = "Descripción";
 inputGroup.appendChild(taskInput);
 
 const dateInput = document.createElement("input");
@@ -59,21 +54,44 @@ createButton.type = "submit";
 createButton.innerText = "Crear";
 newTaskForm.appendChild(createButton);
 
-const addTaskToTable = (task) => {
-    console.log(task)
+const addTaskToTable = () => {
+  // Limpiar el cuerpo de la tabla antes de actualizarla
+  tbody.innerHTML = "";
+
+  tasks.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach((task) => {
     const tr = document.createElement("tr");
 
     const descriptionTd = document.createElement("td");
-    console.log(task.description)
     descriptionTd.innerText = task.description;
     tr.appendChild(descriptionTd);
 
     const dateTd = document.createElement("td");
-    console.log(task.date)
     dateTd.innerText = task.date;
     tr.appendChild(dateTd);
 
+    const doneTd = document.createElement("td");
+    const doneCheckbox = document.createElement("input");
+    doneCheckbox.type = "checkbox";
+    doneCheckbox.checked = task.done;
+    doneCheckbox.addEventListener("change", (event) => {
+      task.done = event.target.checked;
+      updateTaskClasses(tr, task);
+    });
+    doneTd.appendChild(doneCheckbox);
+    tr.appendChild(doneTd);
+
+    updateTaskClasses(tr, task);
     tbody.appendChild(tr);
+  });
+};
+
+const updateTaskClasses = (tr, task) => {
+  const today = new Date().toISOString().split("T")[0];
+  if (task.done || task.date < today) {
+    tr.classList.add("done");
+  } else {
+    tr.classList.remove("done");
+  }
 };
 
 // Event listener for form submission
@@ -82,11 +100,12 @@ newTaskForm.addEventListener("submit", (event) => {
 
   const newTask = {
     description: taskInput.value,
-    date: dateInput.value
+    date: dateInput.value,
+    done: false
   };
 
   tasks.push(newTask);
-  addTaskToTable(newTask);
+  addTaskToTable();
 
   // Clear input fields
   taskInput.value = "";
