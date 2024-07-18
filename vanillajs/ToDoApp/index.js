@@ -45,6 +45,7 @@ inputGroup.className = "inputGroup";
 
 const taskInput = document.createElement("input");
 taskInput.type = "text";
+taskInput.placeholder = "Descripción"
 inputGroup.appendChild(taskInput);
 
 const dateInput = document.createElement("input");
@@ -58,9 +59,7 @@ createButton.type = "submit";
 createButton.innerText = "Crear";
 newTaskForm.appendChild(createButton);
 
-const addTaskToTable = () => {
-  console.log(tasks)
-  tasks.map((task) => {
+const addTaskToTable = (task) => {
     console.log(task)
     const tr = document.createElement("tr");
 
@@ -75,7 +74,6 @@ const addTaskToTable = () => {
     tr.appendChild(dateTd);
 
     tbody.appendChild(tr);
-  })
 };
 
 // Event listener for form submission
@@ -88,7 +86,7 @@ newTaskForm.addEventListener("submit", (event) => {
   };
 
   tasks.push(newTask);
-  addTaskToTable();
+  addTaskToTable(newTask);
 
   // Clear input fields
   taskInput.value = "";

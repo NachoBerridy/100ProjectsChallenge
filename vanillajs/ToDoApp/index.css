@@ -2,10 +2,11 @@
   --back-color: #222222;
   --font-color: #ffffff;
   --contrast: #84DCC6;
+  --gray-back: #95A3B3;
+  --violete-back: #4B4E6D;
 }
 
 * { 
-  background-color: var(--back-color);
   color: var(--font-color);
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
@@ -14,6 +15,16 @@
 }
 
 body{
+  background-color: var(--back-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+#container {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -22,28 +33,81 @@ body{
   height: 100%;
 }
 
-#continer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
-
 .table {
+  width: 40%; /* Ajuste del ancho de la tabla */
   margin-top: 1rem;
+  background-color: var(--violete-back);
+  padding: 0.5rem;
+  border-radius: 10px;
 }
 
-.table thead tr{
+/* Asegura que la cabecera y las filas del cuerpo tengan el mismo diseño flex */
+.table thead, .table tbody {
   display: flex;
+  flex-direction: column;
+}
+
+/* Ajusta el diseño de las filas de la cabecera y el cuerpo */
+.table thead tr, .table tbody tr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table thead tr {
   gap: 0.5rem;
 }
 
+.table tbody tr {
+  background-color: var(--font-color);
+  gap: 0;
+  border-radius: 5px;
+}
+
+.table tbody tr td {
+  padding: 0 0.5rem;
+  color: var(--back-color);
+}
+
+/* Alinea los títulos de la cabecera con los datos */
+.table thead th, .table tbody td {
+  flex: 1; /* Asegura que los th y td ocupen el mismo espacio */
+  text-align: left; /* Alinea el texto al inicio */
+}
+
+
 .newTask {
+  width: 40%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--gray-back);
+  border-radius: 10px;
+  margin-top: 1rem;
 }
 
 .inputGroup {
   display: flex;
   gap: 0.2rem;
+  background-color: transparent;
+  width: 100%;
+}
+
+.inputGroup input{
+  background-color: var(--font-color);
+  color: var(--back-color);
+  border: none;
+  outline: none;
+  padding: 0.3rem;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.newTask button{
+  background-color: var(--contrast);
+  border: none;
+  width: 100%;
+  padding: 0.2rem;
 }
