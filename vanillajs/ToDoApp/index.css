@@ -22,6 +22,7 @@ body{
   align-items: center;
   width: 100vw;
   height: 100vh;
+  padding-top: 1rem;
 }
 
 #container {
@@ -121,4 +122,5 @@ body{
   border: none;
   width: 100%;
   padding: 0.2rem;
+  border-radius: 5px;
 }

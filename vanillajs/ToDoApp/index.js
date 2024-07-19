@@ -10,10 +10,6 @@ container.appendChild(title);
 const table = document.createElement("table");
 table.className = "table";
 
-const caption = document.createElement("caption");
-caption.innerHTML = "Tasks";
-table.appendChild(caption);
-
 const thead = document.createElement("thead");
 const headTr = document.createElement("tr");
 const fields = ["Description", "Date", "Done"];
@@ -55,7 +51,6 @@ createButton.innerText = "Crear";
 newTaskForm.appendChild(createButton);
 
 const addTaskToTable = () => {
-  // Limpiar el cuerpo de la tabla antes de actualizarla
   tbody.innerHTML = "";
 
   tasks.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach((task) => {
