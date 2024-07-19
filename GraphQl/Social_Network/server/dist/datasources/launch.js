@@ -8,8 +8,11 @@ sequelize
     .catch((err) => {
     console.log('Unable to connect ', err);
 });
-const Books = sequelize.define('Books', {
-    title: { type: Sequelize.STRING },
-    author: { type: Sequelize.STRING },
+const Users = sequelize.define('Users', {
+    name: { type: Sequelize.STRING },
+    email: { type: Sequelize.STRING },
+    age: { type: Sequelize.NUMBER },
+    phone: { type: Sequelize.STRING },
+    country: { type: Sequelize.STRING }
 });
-export { Books };
+export { Users };
